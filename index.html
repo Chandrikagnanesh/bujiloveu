@@ -27,11 +27,7 @@ body::after {
     animation: flicker 3s infinite alternate;
     pointer-events: none;
 }
-
-@keyframes flicker {
-    from { opacity: 0.7; }
-    to { opacity: 1; }
-}
+@keyframes flicker { from { opacity: 0.7; } to { opacity: 1; } }
 
 .envelope {
     width: 280px;
@@ -42,7 +38,6 @@ body::after {
     border-radius: 10px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.3);
 }
-
 .envelope::before {
     content: "";
     position: absolute;
@@ -52,7 +47,6 @@ body::after {
     border-right: 140px solid transparent;
     border-top: 90px solid #ffd1dc;
 }
-
 .envelope span {
     position: absolute;
     bottom: 15px;
@@ -70,11 +64,7 @@ body::after {
     backdrop-filter: blur(10px);
     animation: fadeIn 1.5s forwards;
 }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-}
+@keyframes fadeIn { from { opacity:0; transform: scale(0.9);} to { opacity:1; transform: scale(1);} }
 
 .slideshow img {
     width: 100%;
@@ -103,7 +93,6 @@ button {
     transform: rotate(45deg);
     animation: float 8s linear infinite;
 }
-
 .heart::before,
 .heart::after {
     content: '';
@@ -113,10 +102,8 @@ button {
     background: rgba(255,255,255,0.8);
     border-radius: 50%;
 }
-
 .heart::before { top: -8px; left: 0; }
 .heart::after { left: -8px; top: 0; }
-
 @keyframes float {
     0% { transform: translateY(0) rotate(45deg); opacity: 1; }
     100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
@@ -131,7 +118,6 @@ button {
 #game p { margin: 10px 0; }
 </style>
 </head>
-
 <body>
 
 <audio id="music" loop preload="auto" muted>
@@ -147,27 +133,25 @@ button {
     <button id="q1a" onclick="nextQuestion('q2')">You</button>
     <button id="q1b" onclick="nextQuestion('q2')">Me</button>
 
-    <p id="q2" style="display:none;">2️⃣ Who fell first?</p>
-    <button id="q2a" style="display:none;" onclick="nextQuestion('q3')">You</button>
-    <button id="q2b" style="display:none;" onclick="nextQuestion('q3')">Me</button>
+    <p id="q2">2️⃣ Who fell first?</p>
+    <button id="q2a" onclick="nextQuestion('q3')">You</button>
+    <button id="q2b" onclick="nextQuestion('q3')">Me</button>
 
-    <p id="q3" style="display:none;">3️⃣ Are you ready for forever with me? 💍</p>
-    <button id="q3a" style="display:none;" onclick="nextQuestion('q4')">YES ❤️</button>
+    <p id="q3">3️⃣ Are you ready for forever with me? 💍</p>
+    <button id="q3a" onclick="nextQuestion('q4')">YES ❤️</button>
 
     <!-- After we met -->
-    <p id="q4" style="display:none;">4️⃣ First date memory — was it magical?</p>
-    <button id="q4a" style="display:none;" onclick="nextQuestion('q5')">Yes 😍</button>
-    <button id="q4b" style="display:none;" onclick="nextQuestion('q5')">Of course 😘</button>
+    <p id="q4">4️⃣ First date memory — was it magical?</p>
+    <button id="q4a" onclick="nextQuestion('q5')">Yes 😍</button>
+    <button id="q4b" onclick="nextQuestion('q5')">Of course 😘</button>
 
-    <p id="q5" style="display:none;">5️⃣ Our favorite place together?</p>
-    <button id="q5a" style="display:none;" onclick="nextQuestion('q6')">Beach 🌊</button>
-    <button id="q5b" style="display:none;" onclick="nextQuestion('q6')">Hyderabad House 🍛</button>
+    <p id="q5">5️⃣ Our favorite place together?</p>
+    <button id="q5a" onclick="nextQuestion('q6')">Beach 🌊</button>
+    <button id="q5b" onclick="nextQuestion('q6')">Hyderabad House 🍛</button>
 
-    <p id="q6" style="display:none;">6️⃣ Favorite thing about us?</p>
-    <button id="q6a" style="display:none;" onclick="startTimer()">Everything ❤️</button>
-    <button id="q6b" style="display:none;" onclick="startTimer()">All of it 😍</button>
-
-    <div id="timer" style="margin-top:20px; display:none;"></div>
+    <p id="q6">6️⃣ Favorite thing about us?</p>
+    <button id="q6a" onclick="showEnvelope()">Everything ❤️</button>
+    <button id="q6b" onclick="showEnvelope()">All of it 😍</button>
 </div>
 
 <!-- ENVELOPE -->
@@ -210,43 +194,34 @@ button {
 </div>
 
 <script>
-/* --------------------- QUESTIONS & TIMER --------------------- */
+/* --------------------- QUESTIONS --------------------- */
 function nextQuestion(nextId) {
     const allQs = ['q1','q2','q3','q4','q5','q6'];
     const allBtns = ['q1a','q1b','q2a','q2b','q3a','q4a','q4b','q5a','q5b','q6a','q6b'];
 
+    // hide all questions & buttons
     allQs.forEach(q => document.getElementById(q).style.display = 'none');
     allBtns.forEach(b => document.getElementById(b)?.style.display = 'none');
 
-    if(nextId) {
+    // show next question & buttons
+    if(nextId){
         document.getElementById(nextId).style.display = 'block';
         const btns = {
-            'q1': ['q1a','q1b'],
-            'q2': ['q2a','q2b'],
-            'q3': ['q3a'],
-            'q4': ['q4a','q4b'],
-            'q5': ['q5a','q5b'],
-            'q6': ['q6a','q6b']
+            'q1':['q1a','q1b'],
+            'q2':['q2a','q2b'],
+            'q3':['q3a'],
+            'q4':['q4a','q4b'],
+            'q5':['q5a','q5b'],
+            'q6':['q6a','q6b']
         };
         if(btns[nextId]) btns[nextId].forEach(id => document.getElementById(id).style.display='inline-block');
     }
 }
 
-function startTimer() {
-    document.getElementById("timer").style.display = "block";
-    let timeLeft = 60;
-    const timerEl = document.getElementById("timer");
-
-    const countdown = setInterval(() => {
-        timerEl.innerHTML = `Wait ${timeLeft} seconds... good things take time 😌💖`;
-        timeLeft--;
-
-        if (timeLeft < 0) {
-            clearInterval(countdown);
-            document.getElementById("game").style.display = "none";
-            document.getElementById("envelope").style.display = "block";
-        }
-    }, 1000);
+/* --------------------- SHOW ENVELOPE --------------------- */
+function showEnvelope() {
+    document.getElementById("game").style.display = "none";
+    document.getElementById("envelope").style.display = "block";
 }
 
 /* --------------------- CARD & ENVELOPE --------------------- */
@@ -278,7 +253,6 @@ function startSlideshow() {
     const imgs = document.querySelectorAll('.slideshow img');
     if(imgs.length === 0) return;
     imgs[0].style.display = 'block';
-
     setInterval(() => {
         imgs[slide].style.display = 'none';
         slide = (slide + 1) % imgs.length;
@@ -319,7 +293,7 @@ window.addEventListener('load', () => {
 document.body.addEventListener('click', () => {
     const music = document.getElementById('music');
     if(music.muted){
-        music.muted = false; // unmute on first tap
+        music.muted = false;
     }
 });
 </script>
