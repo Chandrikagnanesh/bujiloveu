@@ -214,21 +214,25 @@ button {
 /* --------------------- QUESTIONS & TIMER --------------------- */
 function nextQuestion(nextId) {
     const allQs = ['q1','q2','q3','q4','q5','q6'];
-    allQs.forEach(q => document.getElementById(q).style.display = 'none');
+    const allBtns = ['q1a','q1b','q2a','q2b','q3a','q4a','q4b','q5a','q5b','q6a','q6b'];
 
-    const allBtns = ['q2a','q2b','q3a','q4a','q4b','q5a','q5b','q6a','q6b'];
+    // Hide everything first
+    allQs.forEach(q => document.getElementById(q).style.display = 'none');
     allBtns.forEach(b => document.getElementById(b)?.style.display = 'none');
 
+    // Show next question
     if(nextId) {
         document.getElementById(nextId).style.display = 'block';
         const btns = {
-            'q2':['q2a','q2b'],
-            'q3':['q3a'],
-            'q4':['q4a','q4b'],
-            'q5':['q5a','q5b'],
-            'q6':['q6a','q6b']
+            'q1': ['q1a','q1b'],
+            'q2': ['q2a','q2b'],
+            'q3': ['q3a'],
+            'q4': ['q4a','q4b'],
+            'q5': ['q5a','q5b'],
+            'q6': ['q6a','q6b']
         };
-        if(btns[nextId]) btns[nextId].forEach(id => document.getElementById(id).style.display='inline-block');
+        if(btns[nextId]) btns[nextId].forEach(id => document.getElementById(id).style.display = 'inline-block');
+    
     }
 }
 
@@ -326,3 +330,4 @@ document.body.addEventListener('click', () => {
 
 </body>
 </html>
+
