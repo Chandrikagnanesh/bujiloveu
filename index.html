@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>For Buji Srivaru ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 body {
     margin: 0;
@@ -145,8 +144,8 @@ button {
 
     <!-- Before we met -->
     <p id="q1">1️⃣ Who loves more?</p>
-    <button onclick="nextQuestion('q2')">You</button>
-    <button onclick="nextQuestion('q2')">Me</button>
+    <button id="q1a" onclick="nextQuestion('q2')">You</button>
+    <button id="q1b" onclick="nextQuestion('q2')">Me</button>
 
     <p id="q2" style="display:none;">2️⃣ Who fell first?</p>
     <button id="q2a" style="display:none;" onclick="nextQuestion('q3')">You</button>
@@ -216,11 +215,9 @@ function nextQuestion(nextId) {
     const allQs = ['q1','q2','q3','q4','q5','q6'];
     const allBtns = ['q1a','q1b','q2a','q2b','q3a','q4a','q4b','q5a','q5b','q6a','q6b'];
 
-    // Hide everything first
     allQs.forEach(q => document.getElementById(q).style.display = 'none');
     allBtns.forEach(b => document.getElementById(b)?.style.display = 'none');
 
-    // Show next question
     if(nextId) {
         document.getElementById(nextId).style.display = 'block';
         const btns = {
@@ -231,8 +228,7 @@ function nextQuestion(nextId) {
             'q5': ['q5a','q5b'],
             'q6': ['q6a','q6b']
         };
-        if(btns[nextId]) btns[nextId].forEach(id => document.getElementById(id).style.display = 'inline-block');
-    
+        if(btns[nextId]) btns[nextId].forEach(id => document.getElementById(id).style.display='inline-block');
     }
 }
 
@@ -330,4 +326,3 @@ document.body.addEventListener('click', () => {
 
 </body>
 </html>
-
