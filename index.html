@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Buji Srivaru ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #ff758c, #ff7eb3);
+    font-family: 'Georgia', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    color: white;
+    text-align: center;
+}
+
+/* Candle glow */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255,220,180,0.3), transparent 60%);
+    animation: flicker 3s infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes flicker {
+    from { opacity: 0.7; }
+    to { opacity: 1; }
+}
+
+.envelope {
+    width: 280px;
+    height: 180px;
+    background: white;
+    position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-top: 90px solid #ffd1dc;
+}
+
+.envelope span {
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    color: #ff4f81;
+    font-weight: bold;
+}
+
+.card {
+    display: none;
+    background: rgba(255,255,255,0.15);
+    padding: 25px;
+    border-radius: 20px;
+    max-width: 90%;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.slideshow img {
+    width: 100%;
+    border-radius: 15px;
+    display: none;
+    margin-top: 15px;
+}
+
+button {
+    margin: 8px 5px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background: #ff4f81;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.heart {
+    position: fixed;
+    bottom: -20px;
+    width: 15px;
+    height: 15px;
+    background: rgba(255,255,255,0.8);
+    transform: rotate(45deg);
+    animation: float 8s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 50%;
+}
+
+.heart::before { top: -8px; left: 0; }
+.heart::after { left: -8px; top: 0; }
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+    100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+}
+
+#ending {
+    display: none;
+    font-size: 1.4em;
+    margin-top: 20px;
+}
+
+#game p { margin: 10px 0; }
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop preload="auto" muted>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- GAME BEFORE ENVELOPE -->
+<div id="game">
+    <h2>Before we open… answer honestly 😌💖</h2>
+
+    <!-- Before we met -->
+    <p id="q1">1️⃣ Who loves more?</p>
+    <button onclick="nextQuestion('q2')">You</button>
+    <button onclick="nextQuestion('q2')">Me</button>
+
+    <p id="q2" style="display:none;">2️⃣ Who fell first?</p>
+    <button id="q2a" style="display:none;" onclick="nextQuestion('q3')">You</button>
+    <button id="q2b" style="display:none;" onclick="nextQuestion('q3')">Me</button>
+
+    <p id="q3" style="display:none;">3️⃣ Are you ready for forever with me? 💍</p>
+    <button id="q3a" style="display:none;" onclick="nextQuestion('q4')">YES ❤️</button>
+
+    <!-- After we met -->
+    <p id="q4" style="display:none;">4️⃣ First date memory — was it magical?</p>
+    <button id="q4a" style="display:none;" onclick="nextQuestion('q5')">Yes 😍</button>
+    <button id="q4b" style="display:none;" onclick="nextQuestion('q5')">Of course 😘</button>
+
+    <p id="q5" style="display:none;">5️⃣ Our favorite place together?</p>
+    <button id="q5a" style="display:none;" onclick="nextQuestion('q6')">Beach 🌊</button>
+    <button id="q5b" style="display:none;" onclick="nextQuestion('q6')">Hyderabad House 🍛</button>
+
+    <p id="q6" style="display:none;">6️⃣ Favorite thing about us?</p>
+    <button id="q6a" style="display:none;" onclick="startTimer()">Everything ❤️</button>
+    <button id="q6b" style="display:none;" onclick="startTimer()">All of it 😍</button>
+
+    <div id="timer" style="margin-top:20px; display:none;"></div>
+</div>
+
+<!-- ENVELOPE -->
+<div class="envelope" id="envelope" onclick="openCard()" style="display:none;">
+    <span>Tap to open, my love 💌</span>
+</div>
+
+<!-- CARD CONTENT -->
+<div class="card" id="card">
+    <h2>Happy Valentine’s Day, Buji Srivaru ❤️</h2>
+
+    <p>
+        You are my safe place, my best friend,<br>
+        my forever favorite person.<br><br>
+
+        <em>నువ్వే నా ప్రపంచం… నా ప్రేమ… నా జీవితం.</em><br>
+        (You are my world, my love, my life.)<br><br>
+
+        I love you endlessly 💖
+    </p>
+
+    <div id="countdown"></div>
+
+    <div class="slideshow">
+        <img src="photo1.jpg">
+        <img src="photo2.jpg">
+        <img src="photo3.jpg">
+    </div>
+
+    <button onclick="reveal()">One last thing 💕</button>
+
+    <p id="secret" style="display:none;">
+        Always yours,<br>
+        Srimati 💞
+    </p>
+
+    <div id="ending">
+        Forever with you ❤️
+    </div>
+</div>
+
+<script>
+/* --------------------- QUESTIONS & TIMER --------------------- */
+function nextQuestion(nextId) {
+    const allQs = ['q1','q2','q3','q4','q5','q6'];
+    allQs.forEach(q => document.getElementById(q).style.display = 'none');
+
+    const allBtns = ['q2a','q2b','q3a','q4a','q4b','q5a','q5b','q6a','q6b'];
+    allBtns.forEach(b => document.getElementById(b)?.style.display = 'none');
+
+    if(nextId) {
+        document.getElementById(nextId).style.display = 'block';
+        const btns = {
+            'q2':['q2a','q2b'],
+            'q3':['q3a'],
+            'q4':['q4a','q4b'],
+            'q5':['q5a','q5b'],
+            'q6':['q6a','q6b']
+        };
+        if(btns[nextId]) btns[nextId].forEach(id => document.getElementById(id).style.display='inline-block');
+    }
+}
+
+function startTimer() {
+    document.getElementById("timer").style.display = "block";
+    let timeLeft = 60;
+    const timerEl = document.getElementById("timer");
+
+    const countdown = setInterval(() => {
+        timerEl.innerHTML = `Wait ${timeLeft} seconds... good things take time 😌💖`;
+        timeLeft--;
+
+        if (timeLeft < 0) {
+            clearInterval(countdown);
+            document.getElementById("game").style.display = "none";
+            document.getElementById("envelope").style.display = "block";
+        }
+    }, 1000);
+}
+
+/* --------------------- CARD & ENVELOPE --------------------- */
+function openCard() {
+    document.getElementById('envelope').style.display = 'none';
+    document.getElementById('card').style.display = 'block';
+
+    const music = document.getElementById("music");
+    music.volume = 0.8;
+    music.play().catch(() => {});
+
+    startHearts();
+    startSlideshow();
+    startCountdown();
+}
+
+function startHearts() {
+    setInterval(() => {
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.style.left = Math.random() * 100 + 'vw';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 8000);
+    }, 400);
+}
+
+let slide = 0;
+function startSlideshow() {
+    const imgs = document.querySelectorAll('.slideshow img');
+    if(imgs.length === 0) return;
+    imgs[0].style.display = 'block';
+
+    setInterval(() => {
+        imgs[slide].style.display = 'none';
+        slide = (slide + 1) % imgs.length;
+        imgs[slide].style.display = 'block';
+    }, 2500);
+}
+
+function reveal() {
+    document.getElementById('secret').style.display = 'block';
+    setTimeout(() => {
+        document.getElementById('ending').style.display = 'block';
+    }, 3000);
+}
+
+/* --------------------- COUNTDOWN --------------------- */
+const specialDate = new Date("2026-02-14");
+function startCountdown() {
+    const el = document.getElementById("countdown");
+    setInterval(() => {
+        const now = new Date();
+        const diff = specialDate - now;
+        if(diff>0){
+            const days = Math.floor(diff / (1000*60*60*24));
+            const hours = Math.floor((diff / (1000*60*60)) % 24);
+            const minutes = Math.floor((diff / (1000*60)) % 60);
+            el.innerHTML = `Counting every heartbeat until us 💕<br>${days} days ${hours} hrs ${minutes} mins`;
+        } else {
+            el.innerHTML = `Today. Tomorrow. Forever ❤️`;
+        }
+    },1000);
+}
+
+/* --------------------- AUTO-PLAY MUSIC --------------------- */
+window.addEventListener('load', () => {
+    const music = document.getElementById('music');
+    music.play().catch(() => {});
+});
+document.body.addEventListener('click', () => {
+    const music = document.getElementById('music');
+    if(music.muted){
+        music.muted = false; // unmute on first tap
+    }
+});
+</script>
+
+</body>
+</html>
